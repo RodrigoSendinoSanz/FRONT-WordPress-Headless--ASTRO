@@ -46,3 +46,25 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+
+To support this project you need to create a WordPress
+You can download it from the following link.
+https://developer.wordpress.com/es/studio/
+
+and create in wordpres theme path: wp-content\themes\twentytwentyfive\functions.php
+
+Posts and entries must be created in the WordPress administration panel
+
+```sh
+function disabled_wp_fronted() {
+	if(is_admin() || strpos($_SERVER['REQUEST_URI'],'/wp-json/') === 0){
+		return;
+	}
+
+	wp_redirect('http://localhost:4321/', 301);
+	exit;
+}
+
+add_action('template_redirect','disabled_wp_fronted');
+```
